@@ -25,8 +25,8 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      - name: Pull image from docker hub
-        run: docker pull youshouldknowme/test_deploy:latest
+      # - name: Pull image from docker hub
+      #   run: docker pull youshouldknowme/test_deploy:latest
       - name: Delete old container
         run: docker rm -f test_deploy
       - name: Run docker container
