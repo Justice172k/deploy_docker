@@ -1,0 +1,33 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Login to docker hub
+        run: docker login -u youshouldknowme -p NNT1t72k@
+      - name: Build docker image
+        run: docker build -t test_deploy_docker .
+      - name: tag image
+        run: docker tag  test_deploy_docker youshouldknowme/test_deploy:latest      
+      - name: Publish image to docker hub
+        run: docker push youshouldknowme/test_deploy:latest                 
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull youshouldknowme/test_deploy:latest
+      - name: Delete old container
+        run: docker rm -f test_deploy
+      - name: Run docker container
+        run: docker run --name test_deploy -e PORT=8080 -p 8080:8080 -d youshouldknowme/test_deploy:latest
