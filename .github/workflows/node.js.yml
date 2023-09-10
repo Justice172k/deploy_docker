@@ -5,11 +5,11 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -18,9 +18,9 @@ jobs:
       - name: Build docker image
         run: docker build -t test_deploy_docker .
       - name: tag image
-        run: docker tag  test_deploy_docker youshouldknowme/test_deploy:latest      
+        run: docker tag  test_deploy_docker youshouldknowme/test_deploy:latest
       - name: Publish image to docker hub
-        run: docker push youshouldknowme/test_deploy:latest                 
+        run: docker push youshouldknowme/test_deploy:latest
   deploy:
     needs: build
     runs-on: self-hosted
