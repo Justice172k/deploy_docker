@@ -25,9 +25,9 @@ jobs:
     needs: build
     runs-on: self-hosted
     steps:
-      # - name: Pull image from docker hub
-      #   run: docker pull youshouldknowme/test_deploy:latest
+      - name: Pull image from docker hub
+        run: sudo docker pull youshouldknowme/test_deploy:latest
       - name: Delete old container
-        run: docker rm -f test_deploy
+        run: sudo docker rm -f test_deploy
       - name: Run docker container
-        run: docker run --name test_deploy -e PORT=8080 -p 8080:8080 -d youshouldknowme/test_deploy:latest
+        run: sudo docker run --name test_deploy -e PORT=8080 -p 8080:8080 -d youshouldknowme/test_deploy:latest
