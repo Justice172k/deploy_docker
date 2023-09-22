@@ -13,13 +13,12 @@ phases:
   build:
     commands:
       - echo Building an image
-      - docker rmi $(docker images -a -q)
       - docker build -t deploy_ecs .
-      # - docker tag deploy_ecs:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag deploy_ecs:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Pushing an image
-      # - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
 artifacts:
   files:
     - imagedDetail.json
