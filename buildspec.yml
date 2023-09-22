@@ -14,7 +14,7 @@ phases:
     commands:
       - echo Building an image
       - docker ps
-      # - docker build -t deploy_ecs .
+      - docker build -t deploy_ecs .
       # - docker tag deploy_ecs:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
