@@ -21,7 +21,7 @@ phases:
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image details
       - printf '[{"name":"demo_ecs", "imageUri":"%s"}]'
-        $REPOSITORY_URI:$IMAGE_TAG > imagedDetail.json
+        deploy_ecs:latest > imagedDetail.json
       - cat imagedDetail.json
 
 artifacts:
