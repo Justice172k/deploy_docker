@@ -19,6 +19,3 @@ phases:
     commands:
       - echo Pushing an image
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-artifacts:
-  files:
-    - imagedDetail.json
