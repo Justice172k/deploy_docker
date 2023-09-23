@@ -20,8 +20,8 @@ phases:
       - echo Pushing an image
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image details
-      - printf '[{"name":"demo_ecs", "imageUri":"%s"}]'
-        deploy_ecs:latest > imagedDetail.json
+      - printf '[{"name":"deploy_ecs", "imageUri":"%s"}]'
+        $REPOSITORY_URI:$IMAGE_TAG > imagedDetail.json
       - cat imagedDetail.json
 
 artifacts:
